@@ -31,8 +31,8 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Override
     public Teacher deleteTeacher(long id) {
-        Teacher teacher = getTeacherById(id);
-        teacherRepository.delete(teacher);
+        Teacher teacher = teacherRepository.findById(id).get();
+        teacherRepository.delete(teacherRepository.getReferenceById(id));
         return teacher;
     }
 
@@ -41,8 +41,8 @@ public class TeacherServiceImpl implements TeacherService{
         Teacher teacherLocal = getTeacherById(id);
         teacherLocal.setId(id);
         teacherLocal.setEmail(teacher.getEmail());
-        teacherLocal.setName(teacher.getName());
-        teacherLocal.setSurname(teacher.getSurname());
+        teacherLocal.setFirstName(teacher.getFirstName());
+        teacherLocal.setLastName(teacher.getLastName());
         return saveTeacher(teacherLocal);
     }
 
