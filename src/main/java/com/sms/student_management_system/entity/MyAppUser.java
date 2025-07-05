@@ -8,11 +8,8 @@ public class MyAppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "username")
     private String username;
-    @Column(name = "email")
     private String email;
-    @Column(name = "password")
     private String password;
 
     public long getId() {
