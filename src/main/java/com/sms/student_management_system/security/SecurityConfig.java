@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")            // this must be your actual login form endpoint
                         .loginProcessingUrl("/do-login") // form action where Spring Security expects POST data
-                        .defaultSuccessUrl("/students")    // after successful login
+                        .defaultSuccessUrl("/roles")    // after successful login
                         .permitAll()
                 )
                 .authorizeHttpRequests(authz -> authz
