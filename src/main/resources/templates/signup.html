@@ -35,7 +35,19 @@
           <ion-icon name="lock-closed-outline"></ion-icon>
           <input type="password" id="passwordcon" name="passwordcon" required>
           <label for="">Confirm Password</label>
-      </div>  
+        </div>
+        <div style="margin-top: 15px; margin-bottom: 20px;">
+            <label for="role" style="color: white; font-size: 14px; font-weight: 500; display: block; margin-bottom: 8px;">
+                Select Role
+            </label>
+            <select th:field="*{role}" name="role" id="role" required
+                    style="width: 100%; padding: 10px 14px; border-radius: 8px; background-color: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255,255,255,0.3); font-size: 14px;">
+                <option value="" disabled selected hidden>Select a role</option>
+                <option value="STUDENT">Student</option>
+                <option value="TEACHER">Teacher</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+        </div>
         <button id= "submit" type="submit">Sign Up</button>
       <div class="register">
         <p>Already have an account? <a href="/login">Log In</a></p>
@@ -44,37 +56,37 @@
   </section>
 </body>
 </html>
-<script>
-  const submitButttom = document.getElementById("submit");
-  submitButttom.addEventListener('click',()=>{
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('passwordcon').value;
-    const email = document.getElementById('email').value;
-    const data ={
-      username,
-      email,
-      password
-    }
-    
-    if(password == confirmPassword){
-      const jsonData = JSON.stringify(data);
-      fetch('/req/signup', {
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        body: jsonData
-      })
-      .then(response =>{
-        //alert('succesfull');
-        //if(response.status == 200){
-          //alert('succesfull');
-        //xs}
-      })
-    }
-    
-  })
+<!--<script>-->
+<!--  const submitButttom = document.getElementById("submit");-->
+<!--  submitButttom.addEventListener('click',()=>{-->
+<!--    const username = document.getElementById('username').value;-->
+<!--    const password = document.getElementById('password').value;-->
+<!--    const confirmPassword = document.getElementById('passwordcon').value;-->
+<!--    const email = document.getElementById('email').value;-->
+<!--    const data ={-->
+<!--      username,-->
+<!--      email,-->
+<!--      password-->
+<!--    }-->
+<!--    -->
+<!--    if(password == confirmPassword){-->
+<!--      const jsonData = JSON.stringify(data);-->
+<!--      fetch('/req/signup', {-->
+<!--        method: 'POST',-->
+<!--        headers:{-->
+<!--          'Content-Type': 'application/json'-->
+<!--        },-->
+<!--        body: jsonData-->
+<!--      })-->
+<!--      .then(response =>{-->
+<!--        //alert('succesfull');-->
+<!--        //if(response.status == 200){-->
+<!--          //alert('succesfull');-->
+<!--        //xs}-->
+<!--      })-->
+<!--    }-->
+<!--    -->
+<!--  })-->
 
-  
-</script>
+<!--  -->
+<!--</script>-->

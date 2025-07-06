@@ -32,6 +32,7 @@ public class MyAppUserService implements UserDetailsService {
             return User.builder()
                     .username(userObj.getUsername())
                     .password(userObj.getPassword())
+                    .roles(userObj.getRole().getLabel())
                     .build();
         } else {
             throw new UsernameNotFoundException(username);
