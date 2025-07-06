@@ -8,6 +8,7 @@ public class MyAppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(unique = true, nullable = false)
     private String username;
     private String email;
     private String password;

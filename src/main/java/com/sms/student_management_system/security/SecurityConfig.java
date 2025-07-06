@@ -27,11 +27,6 @@ public class SecurityConfig {
     private MyAppUserService appUserService;
 
     @Bean
-    public UserDetailsService appUserService() {
-        return appUserService;
-    }
-
-    @Bean
     public AuthenticationProvider userAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(appUserService);

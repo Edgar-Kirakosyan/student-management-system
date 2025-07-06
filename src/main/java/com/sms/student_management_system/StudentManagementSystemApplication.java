@@ -1,7 +1,9 @@
 package com.sms.student_management_system;
 
 import com.sms.student_management_system.entity.Student;
+import com.sms.student_management_system.repository.MyAppUserRepository;
 import com.sms.student_management_system.repository.StudentRepository;
+import com.sms.student_management_system.service.MyAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,16 +19,14 @@ public class StudentManagementSystemApplication implements CommandLineRunner {
 	@Autowired
 	private StudentRepository studentRepository;
 
+	@Autowired
+	private MyAppUserService myAppUserService;
+
 	//Testing the mySql part
 	@Override
 	public void run(String... args) throws Exception {
-//		Student st1 = new Student("Edgar", "Kirakosyan", "edgar_kirakosyan@edu.aua.am");
-//		studentRepository.save(st1);
-//
-//		Student st2 = new Student("Serob", "Kirakosyan", "serob_kirakosyan@edu.aua.am");
-//		studentRepository.save(st2);
-//
-//		Student st3 = new Student("Lusya", "Stark", "lusya_stark@edu.aua.am");
-//		studentRepository.save(st3);
+		//myAppUserService.removeDuplicateUsers();
 	}
+
+
 }
