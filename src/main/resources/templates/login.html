@@ -14,7 +14,9 @@
         <form action="/do-login" method="post">
             <h1>Login</h1>
             <div class="dialog-row">
-                <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>                   
+                <label th:if="${param.error}"  class="text-center redText">
+                    Invalid username or password.
+                </label>
             </div>
             <div class="inputbox">
                 <ion-icon name="email-outline"></ion-icon>
@@ -31,7 +33,7 @@
             </div>
             <button>Log in</button>
             <div class="register">
-                <p>Don't have a account ?<a href="/req/signup"> Register!!</a></p>
+                <p>Don't have an account ?<a href="/req/signup"> Register!!</a></p>
             </div>
         </form>
     </section>

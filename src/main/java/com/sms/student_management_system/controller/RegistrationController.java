@@ -26,12 +26,7 @@ public class RegistrationController {
     public String createUser(@ModelAttribute("user") MyAppUser user, Model model) {
         try{
             MyAppUser userTmp = service.signUp(user);
-            userTmp.setPassword(passwordEncoder.encode(userTmp.getPassword()));
-            System.out.println("User details:");
-            System.out.println("Username: " + userTmp.getUsername());
-            System.out.println("Email: " + userTmp.getEmail());
-            System.out.println("Role: " + userTmp.getRole());
-            System.out.println("Password: " + userTmp.getPassword());
+            userTmp.setPassword(passwordEncoder.encode(user.getPassword()));
             repository.save(userTmp);
             return "redirect:/login";
         } catch (UserIsAlreadyPresentException e) {

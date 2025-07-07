@@ -4,9 +4,11 @@ import com.sms.student_management_system.entity.MyAppUser;
 import com.sms.student_management_system.entity.Role;
 import com.sms.student_management_system.entity.Student;
 import com.sms.student_management_system.repository.MyAppUserRepository;
+import com.sms.student_management_system.service.MyAppUserService;
 import com.sms.student_management_system.service.StudentService;
 import com.sms.student_management_system.service.StudentServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,21 +22,23 @@ public class StudentController {
 
     private final StudentService studentService;
     private final MyAppUserRepository myAppUserRepository;
+    private final MyAppUserService myAppUserService;
 
     /**
      * A constructor for assigning a value for studentService instance variable.
      * @param ss
      */
-    public StudentController(StudentService ss, MyAppUserRepository myAppUserRepository) {
+    public StudentController(StudentService ss,
+                             MyAppUserRepository myAppUserRepository,
+                             MyAppUserService myAppUserService) {
         this.studentService = ss;
         this.myAppUserRepository = myAppUserRepository;
+        this.myAppUserService = myAppUserService;
     }
 
     @GetMapping
-    public String listStudents(Model model, @AuthenticationPrincipal UserDetails user){
-        Optional<MyAppUser> optional = myAppUserRepository.findByUsername(user.getUsername());
-        MyAppUser userOriginal = optional.get();
-
+    public String listStudents(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        MyAppUser userOriginal = myAppUserService.loadCurrentUser(userDetails);
         if(userOriginal.getRole().equals(Role.TEACHER))
             return"redirect:/404";
 

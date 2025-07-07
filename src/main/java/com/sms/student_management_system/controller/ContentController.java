@@ -3,8 +3,13 @@ package com.sms.student_management_system.controller;
 import com.sms.student_management_system.entity.MyAppUser;
 import com.sms.student_management_system.entity.Role;
 import com.sms.student_management_system.repository.MyAppUserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +26,28 @@ public class ContentController {
         this.myAppUserRepository = myAppUserRepository;
     }
 
-    @GetMapping("login")
-    public String login() {
-         return "login";
+    @GetMapping("/login")
+    public String login(HttpServletRequest request, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+            authentication.setAuthenticated(false);
+            SecurityContextHolder.clearContext();
+            request.getSession().invalidate();
+        }
+
+        return "login";
     }
 
     @GetMapping("/req/signup")
-    public String signup(Model model) {
+    public String signup(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+            authentication.setAuthenticated(false);
+            SecurityContextHolder.clearContext();
+            request.getSession().invalidate();
+        }
         model.addAttribute("user", new MyAppUser());
         return "signup";
     }

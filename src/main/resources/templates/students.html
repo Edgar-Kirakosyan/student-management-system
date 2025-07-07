@@ -19,7 +19,6 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
@@ -28,6 +27,18 @@
             </li>
             <li class="nav-item" th:if="${#authentication != null and #lists.containsAny(#authentication.authorities, {'ROLE_ADMIN', 'ROLE_TEACHER'})}">
                 <a class="nav-link" th:href="@{/teachers}">Teacher Management</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-2">
+                <a class="btn btn-outline-light btn-sm" th:href="@{/myAppUser/edit}">
+                    My Account
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-light btn-sm" th:href="@{/myAppUser/logout}">
+                    Log out
+                </a>
             </li>
         </ul>
     </div>

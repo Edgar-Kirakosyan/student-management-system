@@ -22,17 +22,19 @@ import java.util.Optional;
 public class TeacherController {
         private final TeacherService teacherService;
         private final MyAppUserRepository myAppUserRepository;
+        private final MyAppUserService myAppUserService;
 
-        public TeacherController(TeacherService teacherService, MyAppUserRepository myAppUserRepository) {
+        public TeacherController(TeacherService teacherService,
+                                 MyAppUserRepository myAppUserRepository,
+                                 MyAppUserService myAppUserService) {
             this.teacherService = teacherService;
             this.myAppUserRepository = myAppUserRepository;
-
+            this.myAppUserService = myAppUserService;
         }
 
         @GetMapping("/teachers")
         public String listTeachers(Model model, @AuthenticationPrincipal UserDetails user) {
-            Optional<MyAppUser> myAppUser = myAppUserRepository.findByUsername(user.getUsername());
-            MyAppUser userOriginal = myAppUser.get();
+            MyAppUser userOriginal = myAppUserService.loadCurrentUser(user);
 
             if(userOriginal.getRole().equals(Role.STUDENT))
                 return "redirect:/404";
